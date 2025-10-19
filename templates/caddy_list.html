@@ -1,0 +1,25 @@
+<!doctype html>
+<html>
+<head><meta charset="utf-8"><title>Caddies</title></head>
+<body>
+  <h2>Django + MySQL Working ✅</h2>
+
+  <form method="post" action="{% url 'caddy_add' %}" style="margin-bottom:1rem">
+    {% csrf_token %}
+    <input name="name" placeholder="Name" required>
+    <input name="level" placeholder="Level" value="Student">
+    <input name="phone" placeholder="Phone">
+    <input name="availability" placeholder="Availability" value="Available">
+    <button type="submit">Add Caddy</button>
+  </form>
+
+  <ul>
+    {% for c in caddies %}
+      <li>#{{ c.id }} — {{ c.name }} ({{ c.level }})
+          {{ c.phone|default:"-" }}, {{ c.availability|default:"-" }}</li>
+    {% empty %}
+      <li>No caddies yet.</li>
+    {% endfor %}
+  </ul>
+</body>
+</html>
